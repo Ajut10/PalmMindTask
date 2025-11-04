@@ -1,6 +1,4 @@
 const jwt = require("jsonwebtoken");
-const userModel = require("../model/user.model");
-const secretKey = "your_secret_key";
 
 module.exports.authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
@@ -20,7 +18,7 @@ module.exports.authenticateToken = (req, res, next) => {
 };
 
 module.exports.generateToken = (user) => {
-  return jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, {
+  return jwt.sign({ id: user._id, email: user.email, role:user.role }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
 };

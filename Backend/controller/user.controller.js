@@ -43,13 +43,31 @@ module.exports.loginUser = async (req, res) => {
 };
 module.exports.getAllUsers = async (req, res) => {
   try {
-    const users = await userModel.find();
-    res.status(200).json({ users });
+    if(req.user.role !=='admin'){
+      return res.status(403).json({message:"Access denied"})
+    }else{
+
+      const users = await userModel.find();
+      res.status(200).json({ users });
+    }
   } catch (error) {
     console.error("Get Users Error:", error);
     res
       .status(500)
       .json({ message: "Error fetching users", error: error.message });
+  }
+};
+module.exports.updateUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const updates = req.body;
+    const updatedUser = await userModel.findByIdAndUpdate(userId, updates, { new: true });
+    res
+      .status(200)
+      .json({ message: "User updated successfully", user: updatedUser });
+  } catch (error) {
+    console.error("Update User Error:", error);
+    res.status(500).json({ message: "Error updating user", error: error.message });
   }
 };
 
