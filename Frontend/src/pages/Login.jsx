@@ -1,20 +1,41 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setError("Please fill in all fields");
       return;
     }
+    try {
+      const res = await axios.post("http://localhost:3000/users/login", {
+        email,
+        password,
+      });
+      if (res.status === 200) {
+        console.log(res.data);
+        toast.success("Login successful");
+
+        navigate("/");
+      } else {
+        console.log("Login failed");
+
+        setError("Login failed");
+      }
+    } catch (error) {
+      setError("An error occurred during login");
+
+      toast.error(res.data.message || "An error occurred during login");
+    }
     setError("");
-    console.log("Login successful:", { email, password });
   };
 
   return (
@@ -63,7 +84,9 @@ const Login = () => {
 
         <p className="text-center text-sm text-gray-600 mt-4">
           Don’t have an account?{" "}
-         <Link to="/register" className="text-blue-600 hover:underline">Sign up</Link>
+          <Link to="/register" className="text-blue-600 hover:underline">
+            Sign up
+          </Link>
         </p>
       </div>
     </div>

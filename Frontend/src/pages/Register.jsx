@@ -1,25 +1,49 @@
-import React from 'react'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [username, setUsername] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = async(e) => {
+    e.preventDefault();
     if (!email || !password) {
-      setError("Please fill in all fields")
-      return
+      setError("Please fill in all fields");
+      return;
     }
-    setError("")
-    console.log("Registration successful:", { email, password })
-  }
 
+    try {
+      const res = await axios.post("http://localhost:3000/users/register", {
+        username,
+        email,
+        password,
+      });
+      if (res.status === 201) {
+        console.log("User registered successfully");
+        toast.success("Registration successful");
+        
+        setEmail("");
+        setPassword("");
+        setUsername("");
+        navigate("/login");
+      } else {
+        setError("Registration failed");
+      }
+    } catch (error) {
+      setError("An error occurred during registration");
+    }
+    setError("");
+    console.log("Registration successful:", { email, password });
+  };
 
   return (
-   <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
           Register to your account
@@ -68,18 +92,19 @@ const Register = () => {
             type="submit"
             className="w-full bg-purple-600 text-white font-medium py-2 rounded-xl hover:bg-purple-700 transition"
           >
-            Login
+            Register
           </button>
         </form>
 
         <p className="text-center text-sm text-gray-600 mt-4">
           Already have an account?{" "}
-          
-          <Link to="/login" className="text-blue-600 hover:underline">Sign in</Link>
+          <Link to="/login" className="text-blue-600 hover:underline">
+            Sign in
+          </Link>
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
