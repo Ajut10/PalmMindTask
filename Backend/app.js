@@ -6,11 +6,15 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const userRouter = require("./router/user.routes");
+const chatRouter = require("./router/chat.routes");
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", userRouter);
+app.use("/chats", chatRouter);
+app.us
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);
 });

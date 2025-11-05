@@ -1,4 +1,4 @@
-# User Management API Documentation
+# User Management and Chat API Documentation
 
 This is a RESTful API for user management with authentication and authorization features.
 
@@ -29,10 +29,9 @@ Create a new user account.
 
 ```json
 {
-    "username":"Boha",
-    "email":"test3@test.com",
-    "password":"test_password"
-    
+  "username": "Boha",
+  "email": "test3@test.com",
+  "password": "test_password"
 }
 ```
 
@@ -40,17 +39,17 @@ Create a new user account.
 
 ```json
 {
-    "message": "User registered successfully",
-    "user": {
-        "username": "Boha",
-        "email": "test3@test.com",
-        "password": "$2b$10$cFK0fQxxBrHEd.GrMGVpgOpQ5eBlJgpWMNGX6dyMAbj8kUOVwy9NK",
-        "role": "user",
-        "_id": "6909e435b368db04fb7e6e2a",
-        "createdAt": "2025-11-04T11:32:05.480Z",
-        "updatedAt": "2025-11-04T11:32:05.480Z",
-        "__v": 0
-    }
+  "message": "User registered successfully",
+  "user": {
+    "username": "Boha",
+    "email": "test3@test.com",
+    "password": "$2b$10$cFK0fQxxBrHEd.GrMGVpgOpQ5eBlJgpWMNGX6dyMAbj8kUOVwy9NK",
+    "role": "user",
+    "_id": "6909e435b368db04fb7e6e2a",
+    "createdAt": "2025-11-04T11:32:05.480Z",
+    "updatedAt": "2025-11-04T11:32:05.480Z",
+    "__v": 0
+  }
 }
 ```
 
@@ -65,9 +64,8 @@ Authenticate a user and receive a JWT token.
 
 ```json
 {
-    
-    "email":"test2@test.com",
-    "password":"test_password"
+  "email": "test2@test.com",
+  "password": "test_password"
 }
 ```
 
@@ -75,18 +73,18 @@ Authenticate a user and receive a JWT token.
 
 ```json
 {
-    "message": "Login Successful",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDliODM3NjkwNmQzY2RkOTQ1OWZlNSIsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc2MjI1NjM0OSwiZXhwIjoxNzYyMjU5OTQ5fQ.md7eKcHV4s-n3A04xWOx2bCrcNWJwILybPSn08cBQFk",
-    "user": {
-        "role": "user",
-        "_id": "6909b8376906d3cdd9459fe5",
-        "username": "Bora",
-        "email": "test2@test.com",
-        "password": "$2b$10$ssNk8vQYoh03OXbg0do47OPUyym36EeLfbvEnRFREO5VM5Nx00Pke",
-        "createdAt": "2025-11-04T08:24:23.976Z",
-        "updatedAt": "2025-11-04T08:24:23.976Z",
-        "__v": 0
-    }
+  "message": "Login Successful",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDliODM3NjkwNmQzY2RkOTQ1OWZlNSIsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc2MjI1NjM0OSwiZXhwIjoxNzYyMjU5OTQ5fQ.md7eKcHV4s-n3A04xWOx2bCrcNWJwILybPSn08cBQFk",
+  "user": {
+    "role": "user",
+    "_id": "6909b8376906d3cdd9459fe5",
+    "username": "Bora",
+    "email": "test2@test.com",
+    "password": "$2b$10$ssNk8vQYoh03OXbg0do47OPUyym36EeLfbvEnRFREO5VM5Nx00Pke",
+    "createdAt": "2025-11-04T08:24:23.976Z",
+    "updatedAt": "2025-11-04T08:24:23.976Z",
+    "__v": 0
+  }
 }
 ```
 
@@ -101,38 +99,38 @@ Retrieve a list of all users (Admin only).
 
 ```json
 {
-    "users": [
-        {
-            "_id": "69049b505f849c5450502e04",
-            "username": "Bohora",
-            "email": "test1@test.com",
-            "password": "test_password",
-            "createdAt": "2025-10-31T11:19:44.124Z",
-            "updatedAt": "2025-10-31T11:19:44.124Z",
-            "__v": 0,
-            "role": "admin"
-        },
-        {
-            "role": "user",
-            "_id": "6909b8376906d3cdd9459fe5",
-            "username": "Santu",
-            "email": "test2@test.com",
-            "password": "$2b$10$ssNk8vQYoh03OXbg0do47OPUyym36EeLfbvEnRFREO5VM5Nx00Pke",
-            "createdAt": "2025-11-04T08:24:23.976Z",
-            "updatedAt": "2025-11-04T11:43:16.526Z",
-            "__v": 0
-        },
-        {
-            "_id": "6909e435b368db04fb7e6e2a",
-            "username": "Boha",
-            "email": "test3@test.com",
-            "password": "$2b$10$cFK0fQxxBrHEd.GrMGVpgOpQ5eBlJgpWMNGX6dyMAbj8kUOVwy9NK",
-            "role": "admin",
-            "createdAt": "2025-11-04T11:32:05.480Z",
-            "updatedAt": "2025-11-04T11:32:05.480Z",
-            "__v": 0
-        }
-    ]
+  "users": [
+    {
+      "_id": "69049b505f849c5450502e04",
+      "username": "Bohora",
+      "email": "test1@test.com",
+      "password": "test_password",
+      "createdAt": "2025-10-31T11:19:44.124Z",
+      "updatedAt": "2025-10-31T11:19:44.124Z",
+      "__v": 0,
+      "role": "admin"
+    },
+    {
+      "role": "user",
+      "_id": "6909b8376906d3cdd9459fe5",
+      "username": "Santu",
+      "email": "test2@test.com",
+      "password": "$2b$10$ssNk8vQYoh03OXbg0do47OPUyym36EeLfbvEnRFREO5VM5Nx00Pke",
+      "createdAt": "2025-11-04T08:24:23.976Z",
+      "updatedAt": "2025-11-04T11:43:16.526Z",
+      "__v": 0
+    },
+    {
+      "_id": "6909e435b368db04fb7e6e2a",
+      "username": "Boha",
+      "email": "test3@test.com",
+      "password": "$2b$10$cFK0fQxxBrHEd.GrMGVpgOpQ5eBlJgpWMNGX6dyMAbj8kUOVwy9NK",
+      "role": "admin",
+      "createdAt": "2025-11-04T11:32:05.480Z",
+      "updatedAt": "2025-11-04T11:32:05.480Z",
+      "__v": 0
+    }
+  ]
 }
 ```
 
