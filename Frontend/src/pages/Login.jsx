@@ -23,8 +23,10 @@ const Login = () => {
       if (res.status === 200) {
         console.log(res.data);
         toast.success("Login successful");
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
 
-        navigate("/");
+        navigate("/Chat");
       } else {
         console.log("Login failed");
 

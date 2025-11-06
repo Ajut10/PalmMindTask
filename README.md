@@ -1,11 +1,11 @@
-# User Management and Chat API Documentation
+# LiveChat API Documentation
 
-This is a RESTful API for user management with authentication and authorization features.
+This is a RESTful API for user management and real-time chat functionality with authentication and authorization features.
 
 ## Base URL
 
 ```
-http://localhost:3000/api
+http://localhost:3000
 ```
 
 ## Authentication
@@ -190,6 +190,90 @@ Delete a user account.
 }
 ```
 
+## Chat Endpoints
+
+### Chat Statistics
+
+Get total chat and user counts (Admin only).
+
+- **URL**: `/chats/count`
+- **Method**: `GET`
+- **Authentication**: Required (Admin only)
+- **Success Response (200)**:
+
+```json
+{
+  "totalChats": 100,
+  "totalUsers": 50,
+  "message": "Chat and user counts fetched successfully"
+}
+```
+
+- **Error Response (403)**:
+
+```json
+{
+  "message": "Access denied"
+}
+```
+
+## WebSocket Events
+
+The application also supports real-time chat functionality using Socket.IO.
+
+### Connection
+
+```javascript
+socket.on("connection");
+```
+
+### Join Chat
+
+```javascript
+socket.emit("join", username);
+```
+
+- **Response Event**: `user-join`
+
+```json
+{
+  "message": "username joined the chat"
+}
+```
+
+### Send Message
+
+```javascript
+socket.emit("message", {
+  username: "johndoe",
+  message: "Hello everyone!",
+});
+```
+
+- **Response Event**: `message`
+
+```json
+{
+  "username": "johndoe",
+  "message": "Hello everyone!",
+  "_id": "message_id"
+}
+```
+
+### Disconnect
+
+```javascript
+socket.on("disconnect");
+```
+
+- **Response Event**: `user-left`
+
+```json
+{
+  "message": "username left the chat"
+}
+```
+
 ## Error Responses
 
 Common error responses include:
@@ -219,7 +303,9 @@ Common error responses include:
 }
 ```
 
-## User Schema
+## Schemas
+
+### User Schema
 
 ```javascript
 {
@@ -241,6 +327,32 @@ Common error responses include:
         type: String,
         enum: ['user', 'admin'],
         default: 'user'
+    }
+}
+```
+
+### Chat Schema
+
+```javascript
+{
+    sender: {
+        type: String,
+        ref: "User",
+        required: true
+    },
+    receiver: {
+        type: String,
+        ref: "User",
+        required: false
+    },
+    message: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    room: {
+        type: String,
+        default: "global"
     }
 }
 ```
