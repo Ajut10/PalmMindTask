@@ -4,7 +4,6 @@ This is a RESTful API for user management and real-time chat functionality with 
 ## Screenshots
 
 ### Chat Interface
-
 ![Chat UI](./scrnshot/Screenshot%202025-11-06%20132233.jpg)
 ### MongoDB Chat Data
 ![MongoDB](./Scrnshot/Screenshot%202025-11-06%20135734.jpg)
